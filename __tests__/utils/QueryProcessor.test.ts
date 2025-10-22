@@ -25,4 +25,44 @@ describe("QueryProcessor", () => {
             "Rohan"
           ));
     })
+
+    test('should do single digit non-negative int arithmatic', () => {
+        const x1 = Math.floor(Math.random() * 10);
+        const x2 = Math.floor(Math.random() * 10);        
+        const query = `${x1}+${x2}`;
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+            `${x1+x2}`
+          ));
+    })
+
+    test('should do multiple digit unsinged int arithmatic', () => {
+        const x1 = Math.floor(Math.random() * 10000);
+        const x2 = Math.floor(Math.random() * 10000);        
+        const query = `${x1}+${x2}`;
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+            `${x1+x2}`
+          ));
+    })
+
+    test('should do multiple digit unsinged int subtract', () => {
+        const x1 = Math.floor(Math.random() * 10000);
+        const x2 = Math.floor(Math.random() * 10000) + x1;  // x2 >= x1        
+        const query = `${x2}-${x1}`;
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+            `${x2-x1}`
+          ));
+    })
+
+    test('should do multiple digit negative int arithmatic', () => {
+        const x1 = -1 * Math.floor(Math.random() * 10000);
+        const x2 = -1 * Math.floor(Math.random() * 10000);        
+        const query = `${x1}+${x2}`;
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+            `${x1+x2}`
+          ));
+    })
 });
