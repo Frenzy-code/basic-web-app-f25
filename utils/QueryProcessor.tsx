@@ -42,6 +42,13 @@ export default function QueryProcessor(query: string): string {
     return `${Math.max(...intlist)}`;
   }
 
+
+  query = query.toLocaleLowerCase().replaceAll("plus", "+")
+  query = query.toLocaleLowerCase().replaceAll("minus", "-")
+  query = query.toLocaleLowerCase().replaceAll("multiplied by", "*")
+  query = query.toLocaleLowerCase().replaceAll("divided by", "/")
+
+
   // no anything that's not math related
   if (!(/[a-zA-Z_@\\\$\|\?\{\}\[\]]/.test(query))) {
     var parser = new Parser();
