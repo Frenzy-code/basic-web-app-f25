@@ -45,11 +45,11 @@ export default function QueryProcessor(query: string): string {
   }
 
 
-  query = query.toLocaleLowerCase().replaceAll("plus", "+")
-  query = query.toLocaleLowerCase().replaceAll("minus", "-")
-  query = query.toLocaleLowerCase().replaceAll("multiplied by", "*")
-  query = query.toLocaleLowerCase().replaceAll("divided by", "/")
-
+  query = query.toLowerCase().replaceAll("what is", "")
+  query = query.toLowerCase().replaceAll("plus", "+")
+  query = query.toLowerCase().replaceAll("minus", "-")
+  query = query.toLowerCase().replaceAll("multiplied by", "*")
+  query = query.toLowerCase().replaceAll("divided by", "/")
 
   // no anything that's not math related
   if (!(/[a-zA-Z_@\\\$\|\?\{\}\[\]]/.test(query))) {
