@@ -48,6 +48,25 @@ export default function QueryProcessor(query: string): string {
     return `${Math.max(...intlist)}`;
   }
 
+  var isSquare = function (n) {
+    return n > 0 && Math.sqrt(n) % 1 === 0;
+};
+var isQube = function (n) {
+    return n > 0 && Math.cbrt(n) % 1 === 0;
+};
+
+  var qmax: string = "which of the following numbers is both a square and a cube:";
+  if (query.toLowerCase().includes(qmax)) {
+    var nums = query.slice(qmax.length)
+    var intlist = nums.split(',').map(Number);
+    var out: Number[] = [];
+    intlist.forEach(n => {
+      if (isSquare(n) && isQube(n)) {out.push(n);}
+    });
+    return `${out}`;
+  }
+
+
 
   query = query.toLowerCase().replaceAll("what is", "")
   query = query.toLowerCase().replaceAll("plus", "+")
