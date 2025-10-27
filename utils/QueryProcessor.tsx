@@ -1,3 +1,5 @@
+import { maxHeaderSize } from "http";
+
 var Parser = require('expr-eval').Parser;
 
 function getMethods(obj: { [x: string]: { toString: () => string; }; }) {
@@ -33,8 +35,15 @@ export default function QueryProcessor(query: string): string {
     return "mhmannai";
   }
 
+  var qmax: string = "which of the following numbers is the largest:";
+  if (query.toLowerCase().includes(qmax)) {
+    var nums = query.slice(qmax.length)
+    var intlist = nums.split(',').map(Number);
+    return `${Math.max(...intlist)}`;
+  }
+
   // no anything that's not math related
-  if (!(/[a-zA-Z_\\\$\|\?\{\}\[\]]/.test(query))) {
+  if (!(/[a-zA-Z_@\\\$\|\?\{\}\[\]]/.test(query))) {
     var parser = new Parser();
     try {
       var answer = parser.parse(query).evaluate();
