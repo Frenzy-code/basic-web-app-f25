@@ -58,10 +58,10 @@ export default function QueryProcessor(query: string): string {
     return `${Math.max(...intlist)}`;
   }
 
-  var isSquare = function (n) {
+  var isSquare = function (n: number) {
     return n > 0 && Math.sqrt(n) % 1 === 0;
 };
-var isQube = function (n) {
+var isQube = function (n: number) {
     return n > 0 && Math.cbrt(n) % 1 === 0;
 };
 
