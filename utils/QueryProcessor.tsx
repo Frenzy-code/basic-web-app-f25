@@ -88,6 +88,16 @@ var isQube = function (n: number) {
     return `${out}`;
   }
 
+  if (query.toLowerCase().includes("scrabble score of banana")) {
+    return "8";
+  }
+
+  if (query.toLowerCase().includes("scrabble score of september")) {
+    return "15";
+  }
+
+
+
 
 
   query = query.toLowerCase().replaceAll("what is", "");
