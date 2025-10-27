@@ -16,6 +16,16 @@ function getMethods(obj: { [x: string]: { toString: () => string; }; }) {
   return result;
 }
 
+function isPrime(num: number): boolean {
+    for (let i = 2; i < num; i++) {
+        if (num % i === 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 
 export default function QueryProcessor(query: string): string {
   if (query.trim().length === 0) return "";
@@ -62,6 +72,18 @@ var isQube = function (n) {
     var out: Number[] = [];
     intlist.forEach(n => {
       if (isSquare(n) && isQube(n)) {out.push(n);}
+    });
+    return `${out}`;
+  }
+
+  var qmax: string = "which of the following numbers are primes:";
+  if (query.toLowerCase().includes(qmax)) {
+    var nums = query.slice(qmax.length)
+    var intlist = nums.split(',').map(Number);
+    var out: Number[] = [];
+    
+    intlist.forEach(n => {
+      if (isPrime(n)) {out.push(n);}
     });
     return `${out}`;
   }
