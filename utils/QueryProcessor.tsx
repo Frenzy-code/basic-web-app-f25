@@ -88,12 +88,41 @@ var isQube = function (n: number) {
     return `${out}`;
   }
 
-  if (query.toLowerCase().includes("scrabble score of banana")) {
-    return "8";
+  // Handle anagram queries
+  const anagramMatch = query.match(/which of the following is an anagram of (\w+): (.+)\?/i);
+  if (anagramMatch) {
+    const target = anagramMatch[1].toLowerCase();
+    const candidates = anagramMatch[2].split(',').map(w => w.trim().toLowerCase());
+    const targetSorted = target.split('').sort().join('');
+
+    const anagrams = candidates.filter(word => {
+      const wordSorted = word.split('').sort().join('');
+      return wordSorted === targetSorted;
+    });
+
+    return anagrams.join(', ');
   }
 
-  if (query.toLowerCase().includes("scrabble score of september")) {
-    return "15";
+  // Handle Scrabble score queries
+  const scrabbleMatch = query.match(/what is the scrabble score of (\w+)/i);
+  if (scrabbleMatch) {
+    const word = scrabbleMatch[1].toLowerCase();
+    const scores: { [key: string]: number } = {
+      'a': 1, 'e': 1, 'i': 1, 'o': 1, 'u': 1, 'l': 1, 'n': 1, 'r': 1, 's': 1, 't': 1,
+      'd': 2, 'g': 2,
+      'b': 3, 'c': 3, 'm': 3, 'p': 3,
+      'f': 4, 'h': 4, 'v': 4, 'w': 4, 'y': 4,
+      'k': 5,
+      'j': 8, 'x': 8,
+      'q': 10, 'z': 10
+    };
+
+    let total = 0;
+    for (const letter of word) {
+      total += scores[letter] || 0;
+    }
+
+    return total.toString();
   }
 
 
